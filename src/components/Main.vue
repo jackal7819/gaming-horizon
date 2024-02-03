@@ -9,21 +9,7 @@
 		<div
 			class="grid gap-10 place-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
 		>
-			<Game v-for="game in games" :key="game.id" :title="game.title" :price="game.price" :url="game.url"/>
-			<!-- <Game />
-			<Game />
-			<Game />
-			<Game />
-			<Game />
-			<Game />
-			<Game />
-			<Game />
-			<Game />
-			<Game />
-			<Game />
-			<Game />
-			<Game />
-			<Game /> -->
+			<Game v-for="game in games" :key="game.id" v-bind="game" />
 		</div>
 	</main>
 </template>
