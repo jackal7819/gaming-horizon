@@ -1,5 +1,6 @@
 <script setup>
 	import favorite from '../assets/favorite.svg';
+	import heart from '../assets/heart.svg';
 	import plus from '../assets/plus.svg';
 	import check from '../assets/check.svg';
 
@@ -8,6 +9,10 @@
 		title: String,
 		price: Number,
 		url: String,
+		isFavorite: Boolean,
+		isAdded: Boolean,
+		onClickAdd: Function,
+		onClickFavorite: Function,
 	});
 </script>
 
@@ -16,9 +21,10 @@
 		class="relative duration-300 border cursor-pointer hover:shadow-slate-400 rounded-2xl border-slate-400 w-72 hover:shadow-xl hover:-translate-y-3"
 	>
 		<img
-			:src="favorite"
+			:src="isFavorite ? heart : favorite"
 			alt="favorite"
 			class="absolute w-5 h-5 duration-300 top-5 left-5 hover:scale-125"
+			@click="onClickFavorite(id)"
 		/>
 		<img :src="url" alt="game" class="rounded-2xl" />
 		<div class="p-5">
@@ -29,14 +35,10 @@
 					<strong>{{ price }} $</strong>
 				</div>
 				<img
-					:src="plus"
-					alt="favorite"
+					:src="isAdded ? check : plus"
+					alt="add"
 					class="w-5 h-5 duration-300 hover:scale-125"
-				/>
-				<img
-					:src="check"
-					alt="favorite"
-					class="hidden w-5 h-5"
+					@click="onClickAdd(id)"
 				/>
 			</div>
 		</div>
