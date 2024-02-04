@@ -1,10 +1,60 @@
 <script setup>
 	import CartItem from './CartItem.vue';
+	import { games } from '../data';
 </script>
 
 <template>
-    <div class="fixed top-0 left-0 z-10 w-full h-full bg-black opacity-60"></div>
-	<div>
-		<CartItem />
+	<div
+		class="fixed top-0 left-0 z-10 w-full h-full bg-black opacity-60"
+	></div>
+	<div
+		class="fixed right-0 z-20 flex flex-col h-full gap-10 p-10 bg-blue-950 w-80 sm:w-96"
+	>
+		<div class="flex items-center justify-between">
+			<h2 class="text-2xl font-bold">Cart</h2>
+			<button
+				class="px-8 py-2 duration-300 bg-blue-900 border rounded-lg border-slate-400 hover:bg-blue-800 active:bg-blue-700"
+			>
+				Back
+			</button>
+		</div>
+		<div class="flex flex-col flex-1 gap-5">
+			<CartItem
+				:id="1"
+				:title="games[0].title"
+				:price="games[0].price"
+				:url="games[0].url"
+			/>
+			<CartItem
+				:id="1"
+				:title="games[1].title"
+				:price="games[1].price"
+				:url="games[1].url"
+			/>
+			<CartItem
+				:id="1"
+				:title="games[2].title"
+				:price="games[2].price"
+				:url="games[2].url"
+			/>
+		</div>
+		<div class="flex flex-col gap-5">
+			<div class="flex justify-between gap-2">
+				<p>Tax 20%:</p>
+				<div class="flex-1 border-b border-slate-400"></div>
+				<strong>211 $</strong>
+			</div>
+			<div class="flex justify-between gap-2">
+				<p>Total:</p>
+				<div class="flex-1 border-b border-slate-400"></div>
+				<strong>1055 $</strong>
+			</div>
+			<button
+				class="w-full py-2 duration-300 bg-blue-900 border rounded-lg border-slate-400 hover:bg-blue-800 active:bg-blue-700 disabled:bg-sky-950"
+				:disabled="games.length === 0"
+			>
+				Place an order
+			</button>
+		</div>
 	</div>
 </template>
