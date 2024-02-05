@@ -18,7 +18,7 @@
 
 <template>
 	<div
-		class="relative duration-300 border cursor-pointer hover:shadow-slate-400 rounded-2xl border-slate-400 w-72 hover:shadow-xl hover:-translate-y-3"
+		class="relative duration-300 border cursor-pointer hover:shadow-slate-400 rounded-2xl border-slate-400 w-72 hover:shadow-xl hover:-translate-y-3 bg-sky-950"
 	>
 		<img
 			:src="isFavorite ? heart : favorite"
@@ -26,7 +26,7 @@
 			class="absolute w-5 h-5 duration-300 top-5 left-5 hover:scale-125"
 			@click="onClickFavorite(id)"
 		/>
-		<img :src="url" alt="game" class="rounded-2xl" />
+		<img :src="url" alt="game" class="rounded-t-2xl" />
 		<div class="p-5">
 			<p>{{ title }}</p>
 			<div class="flex justify-between">

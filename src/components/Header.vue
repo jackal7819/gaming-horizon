@@ -7,13 +7,13 @@
 
 <template>
 	<header
-		class="flex justify-between border-b border-slate-400 px-[5vw] py-10"
+		class="flex md:justify-between border-b border-slate-400 px-[5vw] py-10 flex-col md:flex-row justify-center items-center gap-5"
 	>
 		<div class="flex items-center gap-5">
 			<img :src="gamepad" alt="logo" class="w-20" />
 			<div>
-				<h2 class="text-xl font-bold uppercase">Gaming Horizon</h2>
-				<p>Play your favorite games</p>
+				<h2 class="text-xl font-bold text-center uppercase">Gaming Horizon</h2>
+				<p class="text-center">Play your favorite games</p>
 			</div>
 		</div>
 		<ul class="flex items-center gap-5">

@@ -1,25 +1,26 @@
 {
-  "name": "gaming-horizon",
-  "version": "0.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
-  },
-  "dependencies": {
-    "vue": "^3.4.15"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.3",
-    "@vitejs/plugin-vue-jsx": "^3.1.0",
-    "autoprefixer": "^10.4.17",
-    "eslint": "^8.49.0",
-    "eslint-plugin-vue": "^9.17.0",
-    "postcss": "^8.4.33",
-    "tailwindcss": "^3.4.1",
-    "vite": "^5.0.11"
-  }
+	"name": "gaming-horizon",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+	},
+	"dependencies": {
+		"@ant-design/icons-vue": "^7.0.1",
+		"vue": "^3.4.15"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-vue": "^5.0.3",
+		"@vitejs/plugin-vue-jsx": "^3.1.0",
+		"autoprefixer": "^10.4.17",
+		"eslint": "^8.49.0",
+		"eslint-plugin-vue": "^9.17.0",
+		"postcss": "^8.4.33",
+		"tailwindcss": "^3.4.1",
+		"vite": "^5.0.11"
+	}
 }
