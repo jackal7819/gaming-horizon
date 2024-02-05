@@ -1,11 +1,49 @@
 <script setup>
 	import { SearchOutlined } from '@ant-design/icons-vue';
+	import { onMounted, ref } from 'vue';
+	import axios from 'axios';
 	import Game from './Game.vue';
 
-	defineProps({
-		games: Array,
-	})
-	
+	const URL =
+		'https://gaming-horizon-default-rtdb.europe-west1.firebasedatabase.app/.json';
+
+	const games = ref([]);
+	let originalGames = [];
+
+	onMounted(async () => {
+		try {
+			const { data } = await axios.get(URL);
+			originalGames = data.games;
+			games.value = sortGames(data.games, 'title');
+		} catch (error) {
+			console.log(error);
+		}
+	});
+	const sortGames = (games, sortBy) => {
+		switch (sortBy) {
+			case 'title':
+				return games.sort((a, b) => a.title.localeCompare(b.title));
+			case 'priceAsc':
+				return games.sort((a, b) => a.price - b.price);
+			case 'priceDesc':
+				return games.sort((a, b) => b.price - a.price);
+			default:
+				return games;
+		}
+	};
+
+	const changeSortCriteria = (event) => {
+		const sortBy = event.target.value;
+		games.value = sortGames(games.value, sortBy);
+	};
+
+	const handleSearch = (event) => {
+		const searchText = event.target.value.toLowerCase();
+		games.value = originalGames.filter((game) =>
+			game.title.toLowerCase().includes(searchText)
+		);
+	};
+
 	const onClickAdd = (id) => console.log(id);
 	const onClickFavorite = (id) => console.log(id);
 </script>
@@ -26,17 +64,19 @@
 						name="search"
 						id="search"
 						placeholder="Search..."
+						@input="handleSearch"
 						class="p-2 pl-10 border-2 rounded-lg outline-none focus:border-[#ffd43b] text-lg"
 					/>
 				</div>
 				<select
 					name="sort"
 					id="sort"
+					@change="changeSortCriteria"
 					class="p-2 border-2 rounded-lg outline-none focus:border-[#ffd43b] text-lg"
 				>
-					<option value="name">By Title</option>
-					<option value="price">By Price (low)</option>
-					<option value="price">By Price (high)</option>
+					<option value="title">By Title</option>
+					<option value="priceAsc">By Price (low)</option>
+					<option value="priceDesc">By Price (high)</option>
 				</select>
 			</div>
 		</div>
