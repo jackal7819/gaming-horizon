@@ -11,8 +11,8 @@
 		url: String,
 		isFavorite: Boolean,
 		isAdded: Boolean,
-		onClickAdd: Function,
-		onClickFavorite: Function,
+		toggleCart: Function,
+		toggleFavorite: Function,
 	});
 </script>
 
@@ -24,7 +24,7 @@
 			:src="isFavorite ? heart : favorite"
 			alt="favorite"
 			class="absolute w-5 h-5 duration-300 top-5 left-5 hover:scale-125"
-			@click="onClickFavorite(id)"
+			@click="toggleFavorite(id)"
 		/>
 		<img :src="url" alt="game" class="rounded-t-2xl" />
 		<div class="p-5">
@@ -38,7 +38,7 @@
 					:src="isAdded ? check : plus"
 					alt="add"
 					class="w-5 h-5 duration-300 hover:scale-125"
-					@click="onClickAdd(id)"
+					@click="toggleCart(id)"
 				/>
 			</div>
 		</div>

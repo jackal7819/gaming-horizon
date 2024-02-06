@@ -10,7 +10,7 @@
 	const games = ref([]);
 	let originalGames = [];
 
-	onMounted(async () => {
+	const fetchItems = async () => {
 		try {
 			const { data } = await axios.get(URL);
 			originalGames = data.games;
@@ -18,7 +18,8 @@
 		} catch (error) {
 			console.log(error);
 		}
-	});
+	};
+
 	const sortGames = (games, sortBy) => {
 		switch (sortBy) {
 			case 'title':
@@ -44,8 +45,17 @@
 		);
 	};
 
-	const onClickAdd = (id) => console.log(id);
-	const onClickFavorite = (id) => console.log(id);
+	const toggleCart = async (gameId) => {
+		const game = games.value.find((game) => game.id === gameId);
+		game.isAdded = !game.isAdded;
+	};
+
+	const toggleFavorite = async (gameId) => {
+		const game = games.value.find((game) => game.id === gameId);
+		game.isFavorite = !game.isFavorite;
+	};
+
+	onMounted(fetchItems);
 </script>
 
 <template>
@@ -87,8 +97,8 @@
 				v-for="game in games"
 				:key="game.id"
 				v-bind="game"
-				:onClickAdd="() => onClickAdd(game.id)"
-				:onClickFavorite="() => onClickFavorite(game.id)"
+				:toggleCart="() => toggleCart(game.id)"
+				:toggleFavorite="() => toggleFavorite(game.id)"
 			/>
 		</div>
 	</main>
