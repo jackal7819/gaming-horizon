@@ -1,19 +1,19 @@
-import url01 from './assets/baldurs.avif';
-import url02 from './assets/deathloop.webp';
-import url03 from './assets/diablo.webp';
-import url04 from './assets/frontiers.webp';
-import url05 from './assets/island.webp';
-import url06 from './assets/lies.avif';
-import url07 from './assets/lords.avif';
-import url08 from './assets/prince.avif';
-import url09 from './assets/remnant.avif';
-import url10 from './assets/ring.webp';
-import url11 from './assets/sam.webp';
-import url12 from './assets/space.webp';
-import url13 from './assets/spider.avif';
-import url14 from './assets/stray.webp';
-import url15 from './assets/superstars.avif';
-import url16 from './assets/tekken.avif';
+import url01 from '/assets/baldurs.avif';
+import url02 from '/assets/deathloop.webp';
+import url03 from '/assets/diablo.webp';
+import url04 from '/assets/frontiers.webp';
+import url05 from '/assets/island.webp';
+import url06 from '/assets/lies.avif';
+import url07 from '/assets/lords.avif';
+import url08 from '/assets/prince.avif';
+import url09 from '/assets/remnant.avif';
+import url10 from '/assets/ring.webp';
+import url11 from '/assets/sam.webp';
+import url12 from '/assets/space.webp';
+import url13 from '/assets/spider.avif';
+import url14 from '/assets/stray.webp';
+import url15 from '/assets/superstars.avif';
+import url16 from '/assets/tekken.avif';
 
 export const games = [
 	{ id: 1, title: `Baldur's Gate 3`, price: 55, url: url01 },

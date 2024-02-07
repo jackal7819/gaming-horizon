@@ -1,6 +1,9 @@
 <script setup>
 	import CartItem from './CartItem.vue';
 	import { games } from '../data';
+	defineProps({
+		closeCart: Function,
+	});
 </script>
 
 <template>
@@ -14,6 +17,7 @@
 			<h2 class="text-2xl font-bold">Cart</h2>
 			<button
 				class="px-8 py-2 duration-300 bg-blue-900 border rounded-lg border-slate-400 hover:bg-blue-800 active:bg-blue-700"
+				@click="closeCart"
 			>
 				Back
 			</button>
@@ -52,6 +56,7 @@
 			<button
 				class="w-full py-2 duration-300 bg-blue-900 border rounded-lg border-slate-400 hover:bg-blue-800 active:bg-blue-700 disabled:bg-sky-950"
 				:disabled="games.length === 0"
+				@click="closeCart"
 			>
 				Place an order
 			</button>

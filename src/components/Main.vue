@@ -20,6 +20,14 @@
 		}
 	};
 
+	const updateDatabase = async () => {
+		try {
+			await axios.put(URL, { games: games.value });
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const sortGames = (games, sortBy) => {
 		switch (sortBy) {
 			case 'title':
@@ -48,11 +56,13 @@
 	const toggleCart = async (gameId) => {
 		const game = games.value.find((game) => game.id === gameId);
 		game.isAdded = !game.isAdded;
+		await updateDatabase();
 	};
 
 	const toggleFavorite = async (gameId) => {
 		const game = games.value.find((game) => game.id === gameId);
 		game.isFavorite = !game.isFavorite;
+		await updateDatabase();
 	};
 
 	onMounted(fetchItems);
