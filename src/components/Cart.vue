@@ -1,4 +1,5 @@
 <script setup>
+	import { inject } from 'vue';
 	import CartItem from './CartItem.vue';
 	
 	defineProps({
@@ -6,8 +7,9 @@
 		cartGames: Array,
 		total: Number,
 		tax: Number,
-		totalPrice: Number,
 	});
+
+	const removeItem = inject('removeItem');
 </script>
 
 <template>
@@ -33,6 +35,7 @@
 				:title="game.title"
 				:price="game.price"
 				:url="game.url"
+				@remove-item="()=>removeItem(game.id)"
 			/>
 		</div>
 		<div class="flex flex-col gap-5">
@@ -44,7 +47,7 @@
 			<div class="flex justify-between gap-2">
 				<p>Total:</p>
 				<div class="flex-1 border-b border-slate-400"></div>
-				<strong>{{ totalPrice }} $</strong>
+				<strong>{{ total }} $</strong>
 			</div>
 			<button
 				class="w-full py-2 duration-300 bg-blue-900 border rounded-lg border-slate-400 hover:bg-blue-800 active:bg-blue-700 disabled:bg-sky-950"

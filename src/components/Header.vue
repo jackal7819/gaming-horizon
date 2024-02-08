@@ -6,7 +6,7 @@
 
 	defineProps({
 		openCart: Function,
-		totalPrice: Number,
+		total: Number,
 	});
 </script>
 
@@ -31,7 +31,7 @@
 					class="w-8 h-8 duration-300 cursor-pointer hover:scale-125"
 					@click="openCart"
 				/>
-				<b>{{ totalPrice }} $</b>
+				<b>{{ total }} $</b>
 			</li>
 			<li class="flex flex-col items-center gap-2">
 				<img

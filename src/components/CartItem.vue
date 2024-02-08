@@ -6,7 +6,9 @@
 		title: String,
 		price: Number,
 		url: String,
+		// removeItem: Promise,
 	});
+	const emit = defineEmits(['removeItem']);
 </script>
 
 <template>
@@ -17,7 +19,8 @@
 		<div class="flex flex-col justify-between gap-2">
 			<img
 				:src="plus"
-				alt="add"
+				alt="remove"
+				@click="emit('removeItem')"
 				class="absolute w-5 h-5 duration-300 rotate-45 cursor-pointer right-2 top-2 hover:scale-125"
 			/>
 			<p>{{ title }}</p>

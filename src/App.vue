@@ -1,5 +1,5 @@
 <script setup>
-	import { ref, onMounted } from 'vue';
+	import { ref, onMounted, provide } from 'vue';
 	import axios from 'axios';
 	import Header from './components/Header.vue';
 	import Main from './components/Main.vue';
@@ -42,8 +42,7 @@
 			total += game.price;
 		});
 		const tax = total * 0.2;
-		const totalPrice = total + tax;
-		return { total, tax, totalPrice };
+		return { total, tax };
 	};
 
 	const sortGames = (games, sortBy) => {
@@ -85,8 +84,17 @@
 		await updateDatabase();
 	};
 
+	const removeItem = async (gameId) => {
+		const game = games.value.find((game) => game.id === gameId);
+		game.isAdded = false;
+		await updateDatabase();
+		updateCartGames();
+		calculateTotal();
+	};
+
 	const closeCart = () => (cartOpen.value = false);
 	const openCart = () => (cartOpen.value = true);
+	provide('removeItem', removeItem);
 
 	onMounted(fetchItems);
 </script>
@@ -97,14 +105,13 @@
 			v-if="cartOpen"
 			:closeCart="closeCart"
 			:cartGames="cartGames"
-			:totalPrice="calculateTotal().totalPrice"
 			:total="calculateTotal().total"
 			:tax="calculateTotal().tax"
 		/>
 		<div class="mx-auto shadow-xl shadow-slate-800 max-w-screen-2xl">
 			<Header
 				:openCart="openCart"
-				:totalPrice="calculateTotal().totalPrice"
+				:total="calculateTotal().total"
 			/>
 			<Main
 				:games="games"
