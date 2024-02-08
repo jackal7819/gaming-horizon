@@ -1,71 +1,15 @@
 <script setup>
 	import { SearchOutlined } from '@ant-design/icons-vue';
-	import { onMounted, ref } from 'vue';
-	import axios from 'axios';
 	import Game from './Game.vue';
 
-	const URL =
-		'https://gaming-horizon-default-rtdb.europe-west1.firebasedatabase.app/.json';
+	defineProps({
+		games: Array,
+		changeSortCriteria: Function,
+		handleSearch: Function,
+		toggleCart: Function,
+		toggleFavorite: Function,
+	})
 
-	const games = ref([]);
-	let originalGames = [];
-
-	const fetchItems = async () => {
-		try {
-			const { data } = await axios.get(URL);
-			originalGames = data.games;
-			games.value = sortGames(data.games, 'title');
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	const updateDatabase = async () => {
-		try {
-			await axios.put(URL, { games: games.value });
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	const sortGames = (games, sortBy) => {
-		switch (sortBy) {
-			case 'title':
-				return games.sort((a, b) => a.title.localeCompare(b.title));
-			case 'priceAsc':
-				return games.sort((a, b) => a.price - b.price);
-			case 'priceDesc':
-				return games.sort((a, b) => b.price - a.price);
-			default:
-				return games;
-		}
-	};
-
-	const changeSortCriteria = (event) => {
-		const sortBy = event.target.value;
-		games.value = sortGames(games.value, sortBy);
-	};
-
-	const handleSearch = (event) => {
-		const searchText = event.target.value.toLowerCase();
-		games.value = originalGames.filter((game) =>
-			game.title.toLowerCase().includes(searchText)
-		);
-	};
-
-	const toggleCart = async (gameId) => {
-		const game = games.value.find((game) => game.id === gameId);
-		game.isAdded = !game.isAdded;
-		await updateDatabase();
-	};
-
-	const toggleFavorite = async (gameId) => {
-		const game = games.value.find((game) => game.id === gameId);
-		game.isFavorite = !game.isFavorite;
-		await updateDatabase();
-	};
-
-	onMounted(fetchItems);
 </script>
 
 <template>
