@@ -3,11 +3,14 @@
 	import axios from 'axios';
 	import CartItem from '../components/CartItem.vue';
 
-	const URL =
+	const GAMES_URL =
+		'https://gaming-horizon-default-rtdb.europe-west1.firebasedatabase.app/games.json';
+
+	const ORDERS_URL =
 		'https://gaming-horizon-default-rtdb.europe-west1.firebasedatabase.app/orders.json';
 
 	const removeItem = inject('removeItem');
-	const { cartGames } = inject('cart');
+	const { games, cartGames } = inject('cart');
 
 	const calculateTotal = () => {
 		let total = 0;
@@ -21,7 +24,7 @@
 
 	const placeOrder = async () => {
 	try {
-		const data = await axios.get(URL);
+		const data = await axios.get(ORDERS_URL);
 		const existingOrders = data.data || [];
 
 		const newOrder = {
@@ -29,8 +32,13 @@
 			total: calculateTotal().total,
 		};
 
+		games.value.forEach(game => {
+            game.isAdded = false;
+        });
+
 		existingOrders.push(newOrder);
-		await axios.put(URL, existingOrders);
+		await axios.put(GAMES_URL, games.value);
+		await axios.put(ORDERS_URL, existingOrders);
 		cartGames.value = [];
 	} catch (error) {
 		console.error(error);

@@ -7,14 +7,14 @@
 	const cartGames = ref([]);
 	const calculateTotalRef = ref({tax: 0, total: 0});
 	let originalGames = [];
-	const URL =
-		'https://gaming-horizon-default-rtdb.europe-west1.firebasedatabase.app/.json';
+	const GAMES_URL =
+		'https://gaming-horizon-default-rtdb.europe-west1.firebasedatabase.app/games.json';
 
 	const fetchItems = async () => {
 		try {
-			const { data } = await axios.get(URL);
-			originalGames = data.games;
-			games.value = sortGames(data.games, 'title');
+			const { data } = await axios.get(GAMES_URL);
+			originalGames = data;
+			games.value = sortGames(data, 'title');
 			updateCartGames();
 			calculateTotalRef.value = calculateTotal();
 		} catch (error) {
@@ -24,7 +24,7 @@
 
 	const updateDatabase = async () => {
 		try {
-			// await axios.put(URL, { games: games.value });
+			await axios.put(GAMES_URL, games.value );
 			console.log('error');
 		} catch (error) {
 			console.log(error);
@@ -100,6 +100,7 @@
 		toggleFavorite,
 	});
 	provide('cart', {
+		games,
 		cartGames,
 		calculateTotalRef,
 	});
