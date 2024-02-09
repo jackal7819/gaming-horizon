@@ -1,6 +1,10 @@
 <script setup>
 	import { inject } from 'vue';
+	import axios from 'axios';
 	import CartItem from '../components/CartItem.vue';
+
+	const URL =
+		'https://gaming-horizon-default-rtdb.europe-west1.firebasedatabase.app/orders.json';
 
 	const removeItem = inject('removeItem');
 	const { cartGames } = inject('cart');
@@ -14,6 +18,24 @@
 		tax = total * 0.2;
 		return { total, tax };
 	};
+
+	const placeOrder = async () => {
+	try {
+		const data = await axios.get(URL);
+		const existingOrders = data.data || [];
+
+		const newOrder = {
+			games: cartGames.value,
+			total: calculateTotal().total,
+		};
+
+		existingOrders.push(newOrder);
+		await axios.put(URL, existingOrders);
+		cartGames.value = [];
+	} catch (error) {
+		console.error(error);
+	}
+};
 </script>
 
 <template>
@@ -43,6 +65,7 @@
 			<button
 				class="w-full py-2 duration-300 bg-blue-900 border rounded-lg border-slate-400 hover:bg-blue-800 active:bg-blue-700 disabled:bg-sky-950"
 				:disabled="cartGames.length === 0"
+				@click="placeOrder"
 			>
 				Place an order
 			</button>

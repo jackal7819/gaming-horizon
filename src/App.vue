@@ -24,7 +24,8 @@
 
 	const updateDatabase = async () => {
 		try {
-			await axios.put(URL, { games: games.value });
+			// await axios.put(URL, { games: games.value });
+			console.log('error');
 		} catch (error) {
 			console.log(error);
 		}

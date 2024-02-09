@@ -47,7 +47,7 @@
 				<b>Favorites</b>
 			</li>
 			<li class="flex flex-col items-center gap-2">
-				<router-link to="/profile">
+				<router-link to="/orders">
 					<img
 						:src="user"
 						alt="user"
