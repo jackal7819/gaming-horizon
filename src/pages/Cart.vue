@@ -5,28 +5,20 @@
 	const removeItem = inject('removeItem');
 	const { cartGames } = inject('cart');
 
-    const calculateTotal = () => {
-        let total = 0;
-        let tax = 0;
-        cartGames.value.forEach((game) => {
-            total += game.price;
-        });
-        tax = total * 0.2;
-        return { total, tax };
-    };
-    
+	const calculateTotal = () => {
+		let total = 0;
+		let tax = 0;
+		cartGames.value.forEach((game) => {
+			total += game.price;
+		});
+		tax = total * 0.2;
+		return { total, tax };
+	};
 </script>
 
 <template>
-	<div class="flex flex-col gap-10 p-10 height">
-		<div class="flex items-center justify-between">
-			<h2 class="text-2xl font-bold">Cart</h2>
-			<button
-				class="px-8 py-2 duration-300 bg-blue-900 border rounded-lg border-slate-400 hover:bg-blue-800 active:bg-blue-700"
-			>
-				Back
-			</button>
-		</div>
+	<div class="flex flex-col gap-10 px-[5vw] py-10 height">
+		<h2 class="text-2xl font-bold text-center">Cart</h2>
 		<div class="flex flex-wrap justify-center flex-1 gap-5" v-auto-animate>
 			<CartItem
 				v-for="game in cartGames"
@@ -37,7 +29,7 @@
 				@remove-item="() => removeItem(game.id)"
 			/>
 		</div>
-		<div class="flex flex-col gap-5">
+		<div class="flex flex-col w-1/2 gap-5 mx-auto">
 			<div class="flex justify-between gap-2">
 				<p>Tax 20%:</p>
 				<div class="flex-1 border-b border-slate-400"></div>

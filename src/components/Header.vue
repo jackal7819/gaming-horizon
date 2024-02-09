@@ -15,7 +15,10 @@
 	>
 		<div class="flex items-center gap-5">
 			<router-link to="/"
-				><img :src="gamepad" alt="logo" class="w-20"
+				><img
+					:src="gamepad"
+					alt="logo"
+					class="w-20 duration-300 hover:scale-105"
 			/></router-link>
 			<div>
 				<h2 class="text-xl font-bold text-center uppercase">
@@ -46,11 +49,11 @@
 			<li class="flex flex-col items-center gap-2">
 				<router-link to="/profile">
 					<img
-					:src="user"
-					alt="user"
-					class="w-8 h-8 duration-300 hover:scale-125"
+						:src="user"
+						alt="user"
+						class="w-8 h-8 duration-300 hover:scale-125"
 				/></router-link>
-				<b>Profile</b>
+				<b>Orders</b>
 			</li>
 		</ul>
 	</header>
