@@ -6,14 +6,13 @@
 		title: String,
 		price: Number,
 		url: String,
-		// removeItem: Promise,
 	});
 	const emit = defineEmits(['removeItem']);
 </script>
 
 <template>
 	<div
-		class="relative flex items-end w-full gap-4 p-5 duration-300 border bg-sky-950 rounded-2xl border-slate-400"
+		class="relative flex items-end self-start gap-4 p-5 duration-300 border w-80 bg-sky-950 rounded-2xl border-slate-400"
 	>
 		<img :src="url" alt="game" class="w-20" />
 		<div class="flex flex-col justify-between gap-2">

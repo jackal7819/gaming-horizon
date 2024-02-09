@@ -11,3 +11,13 @@ body {
 p {
 	font-family: 'Montserrat Alternates', sans-serif;
 }
+
+.height {
+	min-height: calc(100vh - 229px);
+}
+
+@media screen and (min-width: 768px) {
+	.height {
+		min-height: calc(100vh - 145px);
+	}
+}

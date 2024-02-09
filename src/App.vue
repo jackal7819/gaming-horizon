@@ -2,11 +2,10 @@
 	import { ref, onMounted, provide } from 'vue';
 	import axios from 'axios';
 	import Header from './components/Header.vue';
-	import Cart from './components/Cart.vue';
 
 	const games = ref([]);
 	const cartGames = ref([]);
-	const cartOpen = ref(false);
+	const calculateTotalRef = ref({tax: 0, total: 0});
 	let originalGames = [];
 	const URL =
 		'https://gaming-horizon-default-rtdb.europe-west1.firebasedatabase.app/.json';
@@ -17,7 +16,7 @@
 			originalGames = data.games;
 			games.value = sortGames(data.games, 'title');
 			updateCartGames();
-			calculateTotal();
+			calculateTotalRef.value = calculateTotal();
 		} catch (error) {
 			console.log(error);
 		}
@@ -74,7 +73,7 @@
 		game.isAdded = !game.isAdded;
 		await updateDatabase();
 		updateCartGames();
-		calculateTotal();
+		calculateTotalRef.value = calculateTotal();
 	};
 
 	const toggleFavorite = async (gameId) => {
@@ -88,11 +87,9 @@
 		game.isAdded = false;
 		await updateDatabase();
 		updateCartGames();
-		calculateTotal();
-	};
+		calculateTotalRef.value = calculateTotal();
+	};	
 
-	const closeCart = () => (cartOpen.value = false);
-	const openCart = () => (cartOpen.value = true);
 	provide('removeItem', removeItem);
 	provide('home', {
 		games,
@@ -100,22 +97,19 @@
 		handleSearch,
 		toggleCart,
 		toggleFavorite,
-	})
+	});
+	provide('cart', {
+		cartGames,
+		calculateTotalRef,
+	});
 
 	onMounted(fetchItems);
 </script>
 
 <template>
 	<div class="min-h-screen antialiased text-slate-400 bg-slate-900">
-		<Cart
-			v-if="cartOpen"
-			:closeCart="closeCart"
-			:cartGames="cartGames"
-			:total="calculateTotal().total"
-			:tax="calculateTotal().tax"
-		/>
-		<div class="mx-auto shadow-xl shadow-slate-800 max-w-screen-2xl">
-			<Header :openCart="openCart" :total="calculateTotal().total" />
+		<div class="mx-auto shadow-2xl shadow-slate-800 max-w-screen-2xl">
+			<Header :total="calculateTotal().total" />
 			<router-view></router-view>
 		</div>
 	</div>

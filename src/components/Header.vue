@@ -5,7 +5,6 @@
 	import user from '../assets/user.svg';
 
 	defineProps({
-		openCart: Function,
 		total: Number,
 	});
 </script>
@@ -32,7 +31,6 @@
 						:src="cart"
 						alt="cart"
 						class="w-8 h-8 duration-300 cursor-pointer hover:scale-125"
-						@click="openCart"
 				/></router-link>
 				<b>{{ total }} $</b>
 			</li>
