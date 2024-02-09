@@ -1,15 +1,15 @@
 <script setup>
+	import { inject } from 'vue';
 	import { SearchOutlined } from '@ant-design/icons-vue';
-	import Game from './Game.vue';
+	import Game from '../components/Game.vue';
 
-	defineProps({
-		games: Array,
-		changeSortCriteria: Function,
-		handleSearch: Function,
-		toggleCart: Function,
-		toggleFavorite: Function,
-	})
-
+	const {
+		games,
+		changeSortCriteria,
+		handleSearch,
+		toggleCart,
+		toggleFavorite,
+	} = inject('home');
 </script>
 
 <template>
@@ -46,6 +46,7 @@
 		</div>
 		<div
 			class="grid gap-10 place-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+			v-auto-animate
 		>
 			<Game
 				v-for="game in games"

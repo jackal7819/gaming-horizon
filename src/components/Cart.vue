@@ -1,7 +1,7 @@
 <script setup>
 	import { inject } from 'vue';
 	import CartItem from './CartItem.vue';
-	
+
 	defineProps({
 		closeCart: Function,
 		cartGames: Array,
@@ -28,14 +28,14 @@
 				Back
 			</button>
 		</div>
-		<div class="flex flex-col flex-1 gap-5 overflow-auto">
+		<div class="flex flex-col flex-1 gap-5 overflow-auto" v-auto-animate>
 			<CartItem
 				v-for="game in cartGames"
 				:key="game.id"
 				:title="game.title"
 				:price="game.price"
 				:url="game.url"
-				@remove-item="()=>removeItem(game.id)"
+				@remove-item="() => removeItem(game.id)"
 			/>
 		</div>
 		<div class="flex flex-col gap-5">

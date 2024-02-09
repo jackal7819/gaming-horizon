@@ -2,7 +2,6 @@
 	import { ref, onMounted, provide } from 'vue';
 	import axios from 'axios';
 	import Header from './components/Header.vue';
-	import Main from './components/Main.vue';
 	import Cart from './components/Cart.vue';
 
 	const games = ref([]);
@@ -95,6 +94,13 @@
 	const closeCart = () => (cartOpen.value = false);
 	const openCart = () => (cartOpen.value = true);
 	provide('removeItem', removeItem);
+	provide('home', {
+		games,
+		changeSortCriteria,
+		handleSearch,
+		toggleCart,
+		toggleFavorite,
+	})
 
 	onMounted(fetchItems);
 </script>
@@ -109,17 +115,8 @@
 			:tax="calculateTotal().tax"
 		/>
 		<div class="mx-auto shadow-xl shadow-slate-800 max-w-screen-2xl">
-			<Header
-				:openCart="openCart"
-				:total="calculateTotal().total"
-			/>
-			<Main
-				:games="games"
-				:changeSortCriteria="changeSortCriteria"
-				:handleSearch="handleSearch"
-				:toggleCart="toggleCart"
-				:toggleFavorite="toggleFavorite"
-			/>
+			<Header :openCart="openCart" :total="calculateTotal().total" />
+			<router-view></router-view>
 		</div>
 	</div>
 </template>
